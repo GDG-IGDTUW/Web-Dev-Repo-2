@@ -4,6 +4,7 @@ import Header from './components/Header';
 import HabitList from './components/HabitList';
 import AddHabitForm from './components/AddHabitForm';
 import { HabitContext, HabitProvider } from './context/HabitContext';
+import { Toaster } from 'react-hot-toast';
 import './style.css';
 
 const App = () => {
@@ -20,6 +21,15 @@ const App = () => {
                 habits={habits}
                 toggleComplete={toggleComplete}
                 deleteHabit={deleteHabit}
+            />
+            <Toaster 
+                position='top-center'
+                toastOptions={{
+                    duration: 5000,
+                    style: {
+                        width: '500px',
+                    }
+                }}
             />
         </div>
     );
