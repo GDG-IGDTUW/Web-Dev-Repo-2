@@ -4,15 +4,14 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { HabitProvider } from './context/HabitContext';
 import Home from './components/Home';
 import HabitListPage from './components/HabitListPage';
+import Navbar from './components/Navbar';
 
 
 const App = () => {
         return (
         <Router>
-            <nav>
-                {/* Add navigation links */}
-                <Link to="/">Home</Link> | <Link to="/all-habits">All Habits</Link>
-            </nav>
+        <Navbar/>
+            
             <Routes>
                 <Route path="/" element={<Home />}/>
                 <Route path="/all-habits" element={<HabitListPage />} />
