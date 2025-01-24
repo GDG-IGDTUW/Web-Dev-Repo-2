@@ -1,5 +1,6 @@
 // src/context/HabitContext.js
 import React, { createContext, useState } from 'react';
+import toast from 'react-hot-toast';
 
 export const HabitContext = createContext();
 
@@ -33,16 +34,43 @@ export const HabitProvider = ({ children }) => {
     };
 
     const toggleComplete = (id) => {
+        let habitBeingToggled = false;
         setHabits(prev => {
             const updatedHabits = prev.map((habit) => {
                 if (habit.id === id) {
+                    if (!habit.completed) {
+                        habitBeingToggled = true;
+                    }
                     return { ...habit, completed: !habit.completed };
                 }
                 return habit;
             });
             setLocalStorage('habits', updatedHabits);
             return updatedHabits;
-        })
+        });
+    
+        if (habitBeingToggled) {
+            fetchQuote();
+        }
+    };
+    
+    const fetchQuote = async () => {
+        try {
+            const response = await fetch("https://api.api-ninjas.com/v1/quotes", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Api-Key": "GZSeh7X2i4cdfiX0IWDhjQ==L8g0WBZKLgxTgzCM"
+                }
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            toast.success(data[0].quote);
+        } catch (error) {
+            console.error("Error fetching quotes:", error);
+        }
     };
 
     const deleteHabit = (id) => {
