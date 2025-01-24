@@ -5,7 +5,7 @@ import '../styling/HabitListPage.css'; // Import the CSS file
 
 const HabitListPage = () => {
    
-    const { habits, addHabit, toggleComplete, deleteHabit, clearCompletedHabits } = useContext(HabitContext);
+    const { habits, toggleComplete, deleteHabit } = useContext(HabitContext);
     return (
         <div className="habit-page">
             

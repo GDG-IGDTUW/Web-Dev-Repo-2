@@ -18,6 +18,8 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    margin: 0; /* Removed padding to avoid navbar shifting */
+    
 }
 
 /* App Container */
@@ -25,11 +27,29 @@ body {
     max-width: 1700px; /* Increased width for a more spacious design */
     width: 100%;
     margin: auto;
-    padding: 40px; /* Increased padding for more breathing room */
+    padding: 80px 40px; /* Add top padding to compensate for fixed navbar */
     background: #ffffff;
     border-radius: 20px; /* More rounded corners */
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* More pronounced shadow for emphasis */
     transition: all 0.3s ease-in-out;
+}
+
+
+/* Navbar Styles */
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #4a90e2;
+    border-radius: 10px;
+    position: fixed; /*Keep the navbar at the top */
+    top: 0;
+    left:0;
+    z-index: 1000;
+   
 }
 
 /* Dark Mode Styles */
