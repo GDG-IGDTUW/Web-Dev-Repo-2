@@ -27,7 +27,7 @@ export const HabitProvider = ({ children }) => {
     const addHabit = (name) => {
         const newHabit = { id: Date.now(), name, completed: false };
         setHabits(prev => {
-            const updatedHabits = [...prev, newHabit];
+            const updatedHabits = [newHabit, ...prev];
             setLocalStorage('habits', updatedHabits);
             return updatedHabits;
         });
