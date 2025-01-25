@@ -1,8 +1,21 @@
 // src/components/AddHabitForm.js
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const AddHabitForm = ({ addHabit }) => {
     const [habitName, setHabitName] = useState('');
+    const inputRef = useRef(null);
+    useEffect(() =>{
+        const handleKeyPress = (e) => {
+            if(inputRef.current){
+                inputRef.current.focus();
+            }
+        }
+        window.addEventListener('keydown', handleKeyPress);
+
+        return () =>{
+            window.removeEventListener('keydown', handleKeyPress);
+        }
+    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,6 +33,7 @@ const AddHabitForm = ({ addHabit }) => {
                 value={habitName}
                 onChange={(e) => setHabitName(e.target.value)}
                 maxLength={50}
+                ref={inputRef}
             />
             <button type="submit" disabled={!habitName.trim()}>
                 Add Habit
