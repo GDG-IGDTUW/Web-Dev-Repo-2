@@ -1,13 +1,67 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  z-index: 1;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.random-numbers span {
+  position: absolute;
+  font-size: 3rem;
+  font-weight: bold;
+  color: rgb(163, 136, 238);
+  opacity: 0.85;
+  background-color: rgb(227, 223, 242);
+  border: 4px solid black;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 4px 4px 0 black;
+  z-index: 0;
+  pointer-events: none;
+  @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl;
+}
+
+@media (max-width: 768px) {
+  .random-numbers span {
+    font-size: 2rem; /* Adjust the size for medium screens */
+  }
+}
+
+.custom-focus:focus {
+  outline: 2px solid black;
+  outline-offset: 2px; 
+  border-radius: 7px; 
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.btn-custom {
+  @apply relative rounded-lg border-2 border-gray-900 bg-[#a388ee] px-6 py-3 text-lg font-bold text-gray-900 shadow-[4px_4px_0px_0px_#000] transition-all duration-200 hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
+}
+
+.select-custom {
+  @apply appearance-none w-48 px-4 py-2 rounded-md border-2 border-gray-900 bg-[#a388ee] text-gray-900 font-medium focus:outline-none cursor-pointer shadow-[4px_4px_0px_0px_#000];
+}
+
+.input-custom {
+  @apply flex h-12 border-2 rounded-md border-black bg-white w-full px-3 py-2 ring-offset-white focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 custom-focus;
 }
