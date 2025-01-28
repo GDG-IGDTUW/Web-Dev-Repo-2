@@ -58,9 +58,14 @@ input[type="number"] {
   @apply relative rounded-lg border-2 border-gray-900 bg-[#a388ee] px-6 py-3 text-lg font-bold text-gray-900 shadow-[4px_4px_0px_0px_#000] transition-all duration-200 hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
 }
 
-.select-custom {
-  @apply appearance-none w-48 px-4 py-2 rounded-md border-2 border-gray-900 bg-[#a388ee] text-gray-900 font-medium focus:outline-none cursor-pointer shadow-[4px_4px_0px_0px_#000];
+.reset-btn-custom {
+  @apply relative rounded-lg border-2 border-gray-900 bg-[#a388ee] px-3 py-2 md:px-6 md:py-2 text-lg font-bold text-gray-900 shadow-[4px_4px_0px_0px_#000] transition-all duration-200 hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
 }
+
+.select-custom {
+  @apply appearance-none w-[7rem] md:w-48 px-4 py-2 rounded-md border-2 border-gray-900 bg-[#a388ee] text-gray-900 font-medium focus:outline-none cursor-pointer shadow-[4px_4px_0px_0px_#000];
+}
+
 
 .input-custom {
   @apply flex h-12 border-2 rounded-md border-black bg-white w-full px-3 py-2 ring-offset-white focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 custom-focus;

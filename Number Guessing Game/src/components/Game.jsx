@@ -91,7 +91,7 @@ export default function Game() {
   };
 
   return (
-    <div className="mx-6 flex flex-col gap-5 justify-center items-center relative rounded-lg border-2 border-gray-900 bg-[#a388ee] md:px-16 md:py-12 px-1 py-16 text-lg font-bold text-gray-900 shadow-[4px_4px_0px_0px_#000]">
+    <div className="mx-6 flex flex-col gap-5 justify-center items-center relative rounded-lg border-2 border-gray-900 bg-[#a388ee] md:px-16 md:py-12 px-1 py-10 text-lg font-bold text-gray-900 shadow-[4px_4px_0px_0px_#000]">
       {isGameWon && (
         <ConfettiExplosion
           particleCount={300}
@@ -101,7 +101,7 @@ export default function Game() {
           force={0.35}
         />
       )}
-      <h1 className="md:text-3xl text-center text-xl">Number Guessing Game</h1>
+      <h1 className="md:text-3xl text-center text-2xl">Number Guessing Game</h1>
 
       <div className="flex flex-wrap gap-5 justify-center items-center">
         <div className="relative inline-block">
@@ -130,7 +130,7 @@ export default function Game() {
             </svg>
           </div>
         </div>
-        <button onClick={resetGame} className="btn-custom">
+        <button onClick={resetGame} className="reset-btn-custom">
           Reset Game
         </button>
       </div>
