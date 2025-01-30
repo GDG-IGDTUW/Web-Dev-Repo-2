@@ -6,7 +6,7 @@ const Navbar = () => {
     return (
         <div className="container">
             
-            <div className="title">Habit Tracker</div>
+            <div onClick={ () => navigate("/")} className="title">Habit Tracker</div>
             <div className="button-container">
                 <button className="button"
                 onClick={()=>navigate("/")}

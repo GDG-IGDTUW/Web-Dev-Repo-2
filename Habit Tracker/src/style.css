@@ -37,7 +37,7 @@ body {
     max-width: 1700px; /* Increased width for a more spacious design */
     width: 100%;
     margin: auto;
-    padding: 80px 40px; /* Add top padding to compensate for fixed navbar */
+    padding: 40px 40px; /* Add top padding to compensate for fixed navbar */
     background: #ffffff;
     border-radius: 20px; /* More rounded corners */
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* More pronounced shadow for emphasis */
