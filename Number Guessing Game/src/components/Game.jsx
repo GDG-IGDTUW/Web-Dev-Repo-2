@@ -1,55 +1,7 @@
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import ConfettiExplosion from "react-confetti-explosion";
-
-const generateRandomNumber = (difficulty) => {
-  let min = 1;
-  let max = 10;
-
-  if (difficulty === "medium") {
-    max = 50;
-  } else if (difficulty === "hard") {
-    max = 100;
-  }
-
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
-const generateHint = (number) => {
-  let hints = [];
-
-  if (number % 2 === 0) {
-    hints.push("The number is even.");
-  } else {
-    hints.push("The number is odd.");
-  }
-
-  if (number % 3 === 0) {
-    hints.push("It's divisible by 3.");
-  }
-  if (number % 5 === 0) {
-    hints.push("It's divisible by 5.");
-  }
-
-  if (number <= 5) {
-    hints.push("The number is 5 or smaller.");
-  } else {
-    hints.push("The number is greater than 5.");
-  }
-
-  if (number <= 25) {
-    hints.push("The number is 25 or smaller.");
-  } else if (number <= 50) {
-    hints.push("The number is between 26 and 50.");
-  } else if (number <= 75) {
-    hints.push("The number is between 51 and 75.");
-  } else {
-    hints.push("The number is between 76 and 100.");
-  }
-
-  //   Randomly select one hint to make it more challenging
-  return hints[Math.floor(Math.random() * hints.length)];
-};
+import { generateHint, generateRandomNumber } from "../lib/helperFunctions";
 
 export default function Game() {
   const [number, setNumber] = useState(() => generateRandomNumber("easy"));
@@ -57,6 +9,7 @@ export default function Game() {
   const [attempts, setAttempts] = useState(0);
   const [isGameWon, setIsGameWon] = useState(false);
   const [difficulty, setDifficulty] = useState("easy");
+  
   let maxAttempts = 10;
   if (difficulty === "medium") {
     maxAttempts = 5;
