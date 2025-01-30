@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import ConfettiExplosion from "react-confetti-explosion";
 
@@ -57,19 +57,32 @@ export default function Game() {
   const [attempts, setAttempts] = useState(0);
   const [isGameWon, setIsGameWon] = useState(false);
   const [difficulty, setDifficulty] = useState("easy");
+  const inputRef = useRef(null);
+  
   let maxAttempts = 10;
   if (difficulty === "medium") {
     maxAttempts = 5;
   } else if (difficulty === "hard") {
     maxAttempts = 3;
   }
+
   useEffect(() => {
     setNumber(generateRandomNumber(difficulty));
   }, [difficulty, isGameWon]);
 
+  useEffect(() => {
+    const handleKeyPress = () => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!guess) {
+    if (!guess) {
       toast.error("Please enter a number to guess!");
       return;
     }
@@ -147,6 +160,7 @@ export default function Game() {
           type="number"
           placeholder="Enter your guess"
           className="input-custom"
+          ref={inputRef}
         />
         {isGameWon ? (
           <p className="text-center font-bold">
