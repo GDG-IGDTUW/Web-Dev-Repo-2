@@ -1,5 +1,5 @@
 // src/context/HabitContext.js
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 export const HabitContext = createContext();
@@ -15,6 +15,7 @@ export const HabitProvider = ({ children }) => {
             return [];
         }
     });
+    const [sortBy, setSortBy] = useState('default');
 
     const setLocalStorage = (key, value) => {
         try{
@@ -89,8 +90,25 @@ export const HabitProvider = ({ children }) => {
         });
     }
 
+    useEffect(() => {
+        setHabits((prev) => {
+            const sortedHabits = [...prev].sort((a, b) => {
+                if (sortBy === 'alphabetical') {
+                    return a.name.localeCompare(b.name); 
+                } else if (sortBy === 'completion') {
+                    return a.completed === b.completed ? 0 : a.completed ? 1 : -1; 
+                } else if (sortBy === 'createdAt') {
+                    return b.id - a.id; 
+                }
+                return 0; 
+            });
+            setLocalStorage('habits', sortedHabits);
+            return sortedHabits;
+        })
+    }, [sortBy]);
+    
     return (
-        <HabitContext.Provider value={{ habits, addHabit, toggleComplete, deleteHabit, clearCompletedHabits }}>
+        <HabitContext.Provider value={{ habits, addHabit, toggleComplete, deleteHabit, clearCompletedHabits, setSortBy }}>
             {children}
         </HabitContext.Provider>
     );
