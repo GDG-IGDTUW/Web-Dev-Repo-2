@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import ConfettiExplosion from "react-confetti-explosion";
 import { generateHint, generateRandomNumber } from "../lib/helperFunctions";
+import { winSound, loseSound, resetSound, clickSound } from "../assets";
 
 export default function Game() {
   const [number, setNumber] = useState(() => generateRandomNumber("easy"));
@@ -9,7 +10,8 @@ export default function Game() {
   const [attempts, setAttempts] = useState(0);
   const [isGameWon, setIsGameWon] = useState(false);
   const [difficulty, setDifficulty] = useState("easy");
-  
+  const inputRef = useRef(null);
+
   let maxAttempts = 10;
   if (difficulty === "medium") {
     maxAttempts = 5;
@@ -20,24 +22,44 @@ export default function Game() {
     setNumber(generateRandomNumber(difficulty));
   }, [difficulty, isGameWon]);
 
+  useEffect(() => {
+    const handleKeyPress = () => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!guess) {
+    const audio = new Audio(clickSound);
+    audio.play().catch((error) => console.log(error));
+    if (!guess) {
       toast.error("Please enter a number to guess!");
       return;
     }
     setAttempts(attempts + 1);
 
     if (parseInt(guess) === number && attempts < maxAttempts) {
+      const audio = new Audio(winSound);
+      audio.play().catch((error) => console.log(error));
       setIsGameWon(true);
       return;
     }
-    if (attempts <= maxAttempts) {
+    if (attempts + 1 >= maxAttempts) {
+      const audio = new Audio(loseSound);
+      audio.play().catch((error) => console.log(error));
+      toast.error(`😔 Game Over! The correct number was ${number}.`);
+    } else {
       toast(generateHint(number), { icon: "🤔" });
     }
   };
 
   const resetGame = () => {
+    const audio = new Audio(resetSound);
+    audio.play().catch((error) => console.log(error));
     setGuess("");
     setAttempts(0);
     setIsGameWon(false);
@@ -100,6 +122,7 @@ export default function Game() {
           type="number"
           placeholder="Enter your guess"
           className="input-custom"
+          ref={inputRef}
         />
         {isGameWon ? (
           <p className="text-center font-bold">

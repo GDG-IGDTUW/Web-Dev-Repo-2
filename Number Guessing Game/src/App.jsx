@@ -4,11 +4,14 @@ import Background from "./components/Background";
 import OpeningPage from "./components/OpeningPage";
 import Game from "./components/Game";
 import { Toaster } from "react-hot-toast";
+import { clickSound } from "./assets";
 
 function App() {
   const [isGameStarted, setIsGameStarted] = useState(false);
 
   const startGame = () => {
+    const audio = new Audio(clickSound);
+    audio.play().catch((error) => console.log(error));
     setIsGameStarted(true);
   };
   return (
